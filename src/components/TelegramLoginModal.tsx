@@ -3,12 +3,10 @@ import {
   X,
   Send,
   Lock,
-  Phone,
   Key,
   ShieldCheck,
   AlertCircle,
   Loader2,
-  CheckCircle2,
   Eye,
   EyeOff,
   Sparkles,
@@ -17,7 +15,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import apiClient from '../api/client';
-import { cn } from '../lib/utils';
+import { PhoneInputWithCountry, Country, COUNTRIES } from './PhoneInputWithCountry';
 
 interface TelegramLoginModalProps {
   isOpen: boolean;
@@ -75,6 +73,9 @@ export const TelegramLoginModal: React.FC<TelegramLoginModalProps> = ({
   const [phoneDisplay, setPhoneDisplay] = useState('+998 ');
   const [rawPhoneNumber, setRawPhoneNumber] = useState('');
   const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country>(() => {
+    return COUNTRIES.find((c) => c.code === 'UZ') || COUNTRIES[0];
+  });
 
   // Step 2 states
   const [phoneCode, setPhoneCode] = useState('');
@@ -109,24 +110,6 @@ export const TelegramLoginModal: React.FC<TelegramLoginModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Handle phone input change with strict mask
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-
-    // Prevent completely erasing the country code prefix
-    if (!val.startsWith('+998') && val.length < 5) {
-      setPhoneDisplay('+998 ');
-      setRawPhoneNumber('+998');
-      setIsPhoneValid(false);
-      return;
-    }
-
-    const { formatted, rawPhone, isValid } = formatUzbekPhone(val);
-    setPhoneDisplay(formatted);
-    setRawPhoneNumber(rawPhone);
-    setIsPhoneValid(isValid);
-  };
-
   // Step 1: Send confirmation code
   const handleSendCode = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,7 +127,7 @@ export const TelegramLoginModal: React.FC<TelegramLoginModalProps> = ({
     }
 
     if (!isPhoneValid || !rawPhoneNumber) {
-      setError("Iltimos, to'liq 9 xonali O'zbekiston telefon raqamini kiriting.");
+      setError(`Iltimos, to'liq ${selectedCountry.name} telefon raqamini kiriting.`);
       return;
     }
 
@@ -326,55 +309,27 @@ export const TelegramLoginModal: React.FC<TelegramLoginModalProps> = ({
                 </div>
               </div>
 
-              {/* Uzbekistan Phone Number Input with Strict Mask */}
+              {/* International Phone Number Input with Country Selector & iPhone Underline Mask */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="block text-xs font-semibold text-slate-300">
                     Telefon Raqamingiz <span className="text-rose-400">*</span>
                   </label>
                   <span className="text-[11px] text-slate-400">
-                    Format: <span className="font-mono text-sky-400">+998 (XX) XXX-XX-XX</span>
+                    Davlat: <span className="font-medium text-sky-400">{selectedCountry.flag} {selectedCountry.name}</span>
                   </span>
                 </div>
 
-                <div className="relative flex items-center">
-                  {/* Uzbekistan Flag Icon and prefix indicator */}
-                  <div className="absolute left-3 flex items-center space-x-1.5 pointer-events-none select-none">
-                    <span className="text-base" role="img" aria-label="Uzbekistan">
-                      🇺🇿
-                    </span>
-                  </div>
-
-                  <input
-                    type="text"
-                    required
-                    value={phoneDisplay}
-                    onChange={handlePhoneChange}
-                    placeholder="+998 (90) 123-45-67"
-                    maxLength={19}
-                    className={cn(
-                      'w-full pl-11 pr-10 py-2.5 bg-slate-950/80 border rounded-xl text-sm font-mono tracking-wide text-white placeholder-slate-500 transition focus:outline-none focus:ring-2',
-                      isPhoneValid
-                        ? 'border-emerald-500/80 focus:border-emerald-500 focus:ring-emerald-500/20'
-                        : 'border-slate-800 focus:border-sky-500 focus:ring-sky-500/20'
-                    )}
-                  />
-
-                  {/* Validation State Badge */}
-                  <div className="absolute right-3 flex items-center pointer-events-none">
-                    {isPhoneValid ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-400 animate-fadeIn" />
-                    ) : (
-                      <Phone className="w-4 h-4 text-slate-500" />
-                    )}
-                  </div>
-                </div>
-
-                {isPhoneValid && (
-                  <p className="text-[11px] text-emerald-400 font-medium flex items-center space-x-1 animate-fadeIn">
-                    <span>✓ O'zbekiston raqami to'g'ri kiritildi</span>
-                  </p>
-                )}
+                <PhoneInputWithCountry
+                  value={rawPhoneNumber}
+                  onChange={(fullPhone, valid, formatted, country) => {
+                    setRawPhoneNumber(fullPhone);
+                    setIsPhoneValid(valid);
+                    setPhoneDisplay(formatted);
+                    setSelectedCountry(country);
+                  }}
+                  disabled={loading}
+                />
               </div>
 
               {/* Submit Button */}
@@ -401,7 +356,7 @@ export const TelegramLoginModal: React.FC<TelegramLoginModalProps> = ({
               {/* Phone info card */}
               <div className="p-3.5 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-between text-xs text-slate-300">
                 <div className="flex items-center space-x-2.5">
-                  <span className="text-base">🇺🇿</span>
+                  <span className="text-xl select-none">{selectedCountry.flag}</span>
                   <div>
                     <span className="text-slate-400 block text-[11px]">Kodi yuborilgan raqam:</span>
                     <span className="font-mono font-bold text-white text-sm">{phoneDisplay}</span>
