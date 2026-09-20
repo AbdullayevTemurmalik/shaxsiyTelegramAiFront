@@ -36,7 +36,7 @@ Haqiqiy inson qanday yozsa, xuddi shunday tabiiy, lo'nda va samimiy javob qaytar
     typingDelayMax: settings?.typingDelayMax ?? 4,
     maxContextMessages: settings?.maxContextMessages ?? 8,
     ownerCooldownMinutes: settings?.ownerCooldownMinutes ?? 10,
-    geminiModel: settings?.geminiModel || 'gemini-3.6-flash',
+    geminiModel: settings?.geminiModel || 'gemini-2.0-flash',
     isAiActive: settings?.isAiActive ?? true,
     jarvisEnabled: settings?.jarvisEnabled ?? true,
     jarvisSystemPrompt: settings?.jarvisSystemPrompt ?? `Sening isming JARVIS. Sen egangga xizmat qiluvchi o'ta odobli, aqlli, tezkor va sadoqatli shaxsiy intellektual yordamchisan.
@@ -122,23 +122,23 @@ SENING ASOSIY VAZIFALARING:
   // Model options for CustomSelect
   const modelOptions: SelectOption[] = [
     {
-      value: 'gemini-3.6-flash',
-      label: 'Gemini 3.6 Flash',
-      description: 'Eng tezkor, arzon va zamonaviy multimodal model (Tavsiya etiladi)',
+      value: 'gemini-2.0-flash',
+      label: 'Gemini 2.0 Flash',
+      description: 'Eng tezkor, bepul tier (1500 req/kun), multimodal model (Tavsiya etiladi)',
       badge: 'Tavsiya',
       icon: <Zap className="w-4 h-4" />,
     },
     {
-      value: 'gemini-2.5-flash',
-      label: 'Gemini 2.5 Flash',
-      description: 'Tejamkor va barqaror muloqot modeli',
+      value: 'gemini-1.5-flash',
+      label: 'Gemini 1.5 Flash',
+      description: 'Barqaror va sinovdan o\'tgan model, bepul tier uchun qulay',
       icon: <Zap className="w-4 h-4" />,
     },
     {
-      value: 'gemini-2.5-pro',
-      label: 'Gemini 2.5 Pro',
-      description: 'Yuqori aql, murakkab mantiq va chuqur tahlil',
-      badge: 'Pro',
+      value: 'gemini-2.5-flash-preview-05-20',
+      label: 'Gemini 2.5 Flash (Preview)',
+      description: 'Eng yangi preview modeli, yuqori aql va chuqur tahlil',
+      badge: 'Yangi',
       icon: <Cpu className="w-4 h-4" />,
     },
   ];
@@ -156,7 +156,7 @@ SENING ASOSIY VAZIFALARING:
     {
       value: 'gemini_only',
       label: 'Faqat Google Gemini (4x Kalit)',
-      description: 'Gemini 3.6 Flash round-robin rotatsiyasi orqali',
+      description: 'Gemini 2.0 Flash round-robin rotatsiyasi orqali',
       icon: <Zap className="w-4 h-4" />,
     },
     {

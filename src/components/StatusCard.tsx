@@ -289,7 +289,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({
               : '1.8s'}
           </div>
           <div className="mt-1 text-[10px] sm:text-[11px] text-amber-400/90 font-medium truncate">
-            Gemini 3.6 Flash
+            Gemini 2.0 Flash
           </div>
         </div>
 
