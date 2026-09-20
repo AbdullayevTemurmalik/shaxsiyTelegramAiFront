@@ -105,8 +105,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
 
-            {/* Desktop Navigation Tabs (Hidden on mobile < 768px) */}
-            <nav className="hidden md:flex items-center p-1 bg-slate-900/70 border border-slate-800/80 rounded-2xl backdrop-blur-xl">
+            {/* Desktop Navigation Tabs (Visible only on desktop >= 1024px) */}
+            <nav className="hidden lg:flex items-center p-1 bg-slate-900/70 border border-slate-800/80 rounded-2xl backdrop-blur-xl">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (
@@ -196,40 +196,42 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </header>
 
-      {/* Mobile & Tablet Fixed Bottom Navigation Bar (< 768px / 320px friendly) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#080C14]/95 backdrop-blur-2xl border-t border-slate-800/90 px-1 py-1 flex items-center justify-around shadow-2xl shadow-black/80 select-none pb-safe">
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={cn(
-                'relative flex-1 flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-all duration-200 min-w-0',
-                isActive
-                  ? 'text-sky-400 font-bold'
-                  : 'text-slate-400 hover:text-slate-200'
-              )}
-            >
-              {/* Active Top Glow Line */}
-              {isActive && (
-                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-cyan-400 to-sky-500 rounded-full shadow-[0_0_8px_rgba(56,189,248,0.9)]" />
-              )}
-
-              <div
+      {/* Mobile & Tablet Fixed Bottom Navigation Bar (< 1024px) */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#080C14]/95 backdrop-blur-2xl border-t border-slate-800/90 px-2 sm:px-6 py-1.5 flex items-center justify-around shadow-2xl shadow-black/80 select-none pb-safe">
+        <div className="w-full max-w-2xl mx-auto flex items-center justify-around">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'p-1 sm:p-1.5 rounded-xl transition-all',
-                  isActive && 'bg-sky-500/15 shadow-sm shadow-sky-500/30 transform -translate-y-0.5'
+                  'relative flex-1 flex flex-col sm:flex-row items-center justify-center py-1 sm:py-2 px-1 sm:px-3 rounded-xl transition-all duration-200 min-w-0 space-y-0.5 sm:space-y-0 sm:space-x-2',
+                  isActive
+                    ? 'text-sky-400 font-bold'
+                    : 'text-slate-400 hover:text-slate-200'
                 )}
               >
-                {tab.icon}
-              </div>
-              <span className="text-[9px] sm:text-[10px] font-medium tracking-tight truncate w-full text-center mt-0.5">
-                {tab.shortLabel}
-              </span>
-            </button>
-          );
-        })}
+                {/* Active Top Glow Line */}
+                {isActive && (
+                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 sm:w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-sky-500 rounded-full shadow-[0_0_8px_rgba(56,189,248,0.9)]" />
+                )}
+
+                <div
+                  className={cn(
+                    'p-1 sm:p-1.5 rounded-xl transition-all shrink-0',
+                    isActive && 'bg-sky-500/15 shadow-sm shadow-sky-500/30 transform -translate-y-0.5 sm:translate-y-0'
+                  )}
+                >
+                  {tab.icon}
+                </div>
+                <span className="text-[10px] sm:text-xs font-semibold tracking-tight truncate">
+                  {tab.shortLabel}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </nav>
 
       {/* Custom Railway / Local API Configuration Modal */}

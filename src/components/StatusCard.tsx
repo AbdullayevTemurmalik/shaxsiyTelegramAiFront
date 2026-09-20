@@ -50,11 +50,11 @@ export const StatusCard: React.FC<StatusCardProps> = ({
   return (
     <div className="space-y-6">
       {/* Hero Section: Account Card & Master AI Controller */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5">
         {/* Left: Telegram Profile Card (2 cols) */}
         <div
           className={cn(
-            'lg:col-span-2 relative rounded-3xl p-4 sm:p-6 lg:p-7 backdrop-blur-2xl transition-all duration-300 overflow-hidden',
+            'md:col-span-2 relative rounded-3xl p-4 sm:p-6 lg:p-7 backdrop-blur-2xl transition-all duration-300 overflow-hidden',
             hasSession
               ? 'bg-gradient-to-br from-[#0D1627]/90 via-[#0B111E]/90 to-[#0A0E1A]/95 border border-emerald-500/30 shadow-2xl shadow-emerald-950/20'
               : 'bg-gradient-to-br from-[#0E1528]/95 via-[#0C1220]/90 to-[#080C14]/95 border border-sky-500/25 shadow-2xl shadow-sky-950/30'
@@ -238,7 +238,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({
       </div>
 
       {/* Metrics Row: 4 Sleek Minimalist Cards with Glow & Hover Lift */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 lg:gap-5">
         {/* Metric 1: Total Responses */}
         <div className="group relative bg-[#0D1424]/80 border border-slate-800/80 hover:border-sky-500/40 rounded-2xl p-3 sm:p-4 lg:p-5 shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
           <div className="absolute -top-12 -right-12 w-24 h-24 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition duration-300 pointer-events-none" />
@@ -312,7 +312,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({
       </div>
 
       {/* Middle Interactive Blocks: Gemini Keys 4-Slot Visualizer & Live Rules Controls */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
         {/* Block A: 4-Slot Gemini API Key Visualizer */}
         <div className="bg-[#0D1424]/80 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between">

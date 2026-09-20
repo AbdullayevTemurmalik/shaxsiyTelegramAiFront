@@ -133,7 +133,7 @@ export function App() {
       />
 
       {/* Main Content Area */}
-      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-6 md:py-8 pb-24 md:pb-8 space-y-4 sm:space-y-6 md:space-y-8 overflow-x-hidden">
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-6 md:py-8 pb-24 lg:pb-8 space-y-4 sm:space-y-6 md:space-y-8 overflow-x-hidden">
         {/* Connection status & Hero section (always visible on dashboard) */}
         {activeTab === 'dashboard' && (
           <div className="space-y-6">
