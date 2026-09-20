@@ -20,6 +20,14 @@
   .glass-input {
     @apply bg-slate-950/70 border border-slate-800/90 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition duration-200;
   }
+
+  /* iOS Safe Area Insets for iPhone / iPad Home Indicator */
+  .pb-safe {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0.5rem));
+  }
+  .pt-safe {
+    padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
+  }
 }
 
 /* Custom scrollbars */

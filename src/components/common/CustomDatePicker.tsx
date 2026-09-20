@@ -127,7 +127,7 @@ export const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
       {isOpen && (
         <div
           className={cn(
-            'absolute z-[100] mt-2 w-72 p-3.5 bg-[#0c1322] border border-slate-700/90 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] animate-fadeIn',
+            'absolute z-[100] mt-2 w-[280px] sm:w-72 max-w-[calc(100vw-1.5rem)] p-3.5 bg-[#0c1322] border border-slate-700/90 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] animate-fadeIn',
             align === 'left' ? 'left-0' : 'right-0'
           )}
         >
